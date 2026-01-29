@@ -1,35 +1,119 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function App() {}
+function Ex4() {
+  const [name, nameSetter] = useState("");
+  const [age, ageSetter] = useState(0);
+  const [active, isActive] = useState(false);
+  return (
+    <div>
+      <div className="INameAge">
+        <input
+          type="text"
+          placeholder="Name"
+          onChange={(input) => nameSetter(input.target.value)}
+        />
+        <input
+          type="number"
+          value={age}
+          onChange={(input) => {
+            if (Number.isNaN(parseInt(input.target.value))) {
+              ageSetter(0);
+            } else {
+              ageSetter(parseInt(input.target.value));
+            }
+          }}
+        />
+      </div>
+      <label>
+        <input type="checkbox" defaultChecked />
+        Is Active
+      </label>
+      <div>
+        <p>{name}</p>
+        <p>{age}</p>
+      </div>
+    </div>
+  );
+}
+function Ex3() {
+  const [click, isClicked] = useState(false);
+  const notClicked = () => {
+    return (
+      <button
+        onClick={() => {
+          isClicked(true);
+        }}
+      >
+        👁 Reveal Secret
+      </button>
+    );
+  };
+  const clicked = () => {
+    return (
+      <div>
+        <button
+          onClick={() => {
+            isClicked(false);
+          }}
+        >
+          🙈 Hide Secret
+        </button>
+        <p>✨ React is awesome! ✨</p>
+      </div>
+    );
+  };
+  return <>{click ? clicked() : notClicked()}</>;
+}
+function Ex2() {
+  const [count, countSetter] = useState(0);
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>{count}</h1>
+      <button
+        onClick={() => {
+          countSetter(count - 1);
+        }}
+      >
+        -
+      </button>
+      <button
+        onClick={() => {
+          countSetter(0);
+        }}
+      >
+        Reset
+      </button>
+      <button
+        onClick={() => {
+          countSetter(count + 1);
+        }}
+      >
+        +
+      </button>
     </>
-  )
+  );
+}
+function Ex1() {
+  const [text, textSetter] = useState("Hello, ...!");
+  return (
+    <>
+      <input
+        type="text"
+        placeholder="Enter name"
+        onChange={(input) => {
+          console.log(input.target.value, "input");
+          if (input.target.value === "") {
+            textSetter("Hello, ...!");
+          } else {
+            textSetter(`Hello, ${input.target.value}!`);
+          }
+        }}
+      />
+      <p>{text}</p>
+    </>
+  );
 }
 
-export default App
+export default Ex4;
