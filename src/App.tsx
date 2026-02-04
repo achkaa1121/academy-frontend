@@ -1,35 +1,13 @@
-import { useEffect, useState } from "react";
 import "./App.css";
-
-interface IMovie {
-  title: string;
-}
+import { MovieMain } from "./modules/movie/components/MovieMain";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+const queryClient = new QueryClient();
 
 function App() {
-  const [movies, setMovies] = useState<IMovie[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/movie/movies")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setLoading(false);
-        setMovies(data);
-      });
-  }, []);
-
-  if (loading) {
-    return <h1>Unshij bn</h1>;
-  }
-
   return (
-    <>
-      {movies.map((movie) => {
-        return <h1>{movie.title}</h1>;
-      })}
-    </>
+    <QueryClientProvider client={queryClient}>
+      <MovieMain />
+    </QueryClientProvider>
   );
 }
 
