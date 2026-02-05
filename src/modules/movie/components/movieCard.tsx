@@ -1,9 +1,12 @@
 import type { IMovie } from "../types/movie";
 import { Calendar } from "lucide-react";
 export const MovieCard = ({ movie }: { movie: IMovie }) => {
+  const posterClick = () => {
+    console.log("clicked");
+  };
   return (
     <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg">
-      <div className="w-full relative aspect-2/3">
+      <div className="w-full relative aspect-2/3" onClick={posterClick}>
         <img
           src={movie.poster}
           alt=""
