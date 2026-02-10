@@ -7,8 +7,41 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupText,
+  InputGroupTextarea,
+} from "@/components/ui/input-group";
 import { Link } from "react-router";
+import { SearchIcon } from "lucide-react";
+import { useState } from "react";
+function ListItem({
+  title,
+  children,
+  href,
+  ...props
+}: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
+  return (
+    <li {...props}>
+      <NavigationMenuLink asChild>
+        <Link to={href}>
+          <div className="flex flex-col gap-1 text-sm">
+            <div className="leading-none font-medium">{title}</div>
+            <div className="text-muted-foreground line-clamp-2">{children}</div>
+          </div>
+        </Link>
+      </NavigationMenuLink>
+    </li>
+  );
+}
 export const NavigationMnu = () => {
+  const [search, searchSetter] = useState("");
+  const searchHandle = () => {
+    console.log(search);
+  };
   return (
     <NavigationMenu>
       <NavigationMenuList>
@@ -34,25 +67,17 @@ export const NavigationMnu = () => {
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
+      <InputGroup>
+        <InputGroupInput
+          placeholder="Search by title"
+          onChange={(e) => {
+            searchSetter(e.target.value);
+          }}
+        />
+        <InputGroupAddon align="inline-end">
+          <SearchIcon onClick={searchHandle} className="cursor-pointer" />
+        </InputGroupAddon>
+      </InputGroup>
     </NavigationMenu>
   );
 };
-function ListItem({
-  title,
-  children,
-  href,
-  ...props
-}: React.ComponentPropsWithoutRef<"li"> & { href: string }) {
-  return (
-    <li {...props}>
-      <NavigationMenuLink asChild>
-        <Link to={href}>
-          <div className="flex flex-col gap-1 text-sm">
-            <div className="leading-none font-medium">{title}</div>
-            <div className="text-muted-foreground line-clamp-2">{children}</div>
-          </div>
-        </Link>
-      </NavigationMenuLink>
-    </li>
-  );
-}
