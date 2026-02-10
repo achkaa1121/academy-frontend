@@ -1,12 +1,9 @@
-import { NavigationMnu } from "./NavigationMenu";
-import { useGetMoviesTans } from "../hooks/useGetMoviesTans";
-import { LoaderCircle, Film, AlertCircle } from "lucide-react";
-import { Link } from "react-router-dom";
-import { MovieCard } from "./MovieCard";
-
-export const MainLayout = () => {
+import { NavigationMnu } from "@/modules/home/components/NavigationMenu";
+import { useGetMoviesTans } from "@/modules/home/hooks/useGetMoviesTans";
+import { AlertCircle, Film, LoaderCircle } from "lucide-react";
+import { GenreFlow } from "./GenreFlow";
+export const MovieGenre = () => {
   const { movies, loading, isError } = useGetMoviesTans();
-
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-100">
@@ -55,28 +52,43 @@ export const MainLayout = () => {
       </div>
     );
   }
-
+  const genres = [
+    "Music",
+    "Family",
+    "Comedy",
+    "History",
+    "Romance",
+    "Crime",
+    "War",
+    "Short",
+    "Documentary",
+    "Sci-Fi",
+    "Animation",
+    "News",
+    "Mystery",
+    "Talk-Show",
+    "Adventure",
+    "Biography",
+    "Drama",
+    "Fantasy",
+    "Sport",
+    "Musical",
+    "Thriller",
+    "Horror",
+    "Action",
+    "Western",
+    "Film-Noir",
+  ];
   return (
-    <div className="space-y-6 ">
-      <div>
-        <NavigationMnu />
+    <div className="space-y-6 flex">
+      <NavigationMnu />
+      <div className="flex justify-center">
+        <h1 className="flex text-4xl font-bold text-black">Movies by genre</h1>
       </div>
-      <div>
-        <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-bold text-white">All Movies</h2>
-          <span className="text-slate-400">{movies.length} movies</span>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {movies.map((movie) => (
-            <Link
-              key={movie._id}
-              to={`/movie/${movie._id}`}
-              className="group cursor-pointer transform transition-all duration-300 hover:z-10"
-            >
-              <MovieCard movie={movie} />
-            </Link>
-          ))}
-        </div>
+      <div className="flex flex-col">
+        {genres.map((genre) => (
+          <GenreFlow movies={movies} genre={genre} />
+        ))}
       </div>
     </div>
   );

@@ -43,7 +43,7 @@ export const NavigationMnu = () => {
     console.log(search);
   };
   return (
-    <NavigationMenu>
+    <NavigationMenu className="fixed top-0 left-0 bg-white z-50">
       <NavigationMenuList>
         <NavigationMenuItem>
           <NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
@@ -54,20 +54,20 @@ export const NavigationMnu = () => {
           <NavigationMenuTrigger>Movies</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="w-96">
-              <ListItem href="/movies/top250" title="Top 250 movies">
-                Top 250 movies
+              <ListItem href="/topMovies" title="Top 100 movies">
+                Top 100 highest IMDB rating movies
               </ListItem>
-              <ListItem href="/movies/popular" title="Most popular movies">
-                Most popular movies
+              <ListItem href="/popularMovies" title="Most popular movies">
+                Most popular 100 movies
               </ListItem>
-              <ListItem href="/movies" title=" Movies by genre">
+              <ListItem href="/genres" title=" Movies by genre">
                 Movies by genre
               </ListItem>
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
       </NavigationMenuList>
-      <InputGroup>
+      <InputGroup className="bg-white">
         <InputGroupInput
           placeholder="Search by title"
           onChange={(e) => {
