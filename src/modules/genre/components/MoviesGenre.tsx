@@ -1,9 +1,9 @@
 import { NavigationMnu } from "@/modules/home/components/NavigationMenu";
-import { useGetMoviesTans } from "@/modules/home/hooks/useGetMoviesTans";
 import { AlertCircle, Film, LoaderCircle } from "lucide-react";
 import { GenreFlow } from "./GenreFlow";
+import { useGetGenresTans } from "../hooks/useGetGenres";
 export const MovieGenre = () => {
-  const { movies, loading, isError } = useGetMoviesTans();
+  const { movies, loading, isError } = useGetGenresTans();
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-100">

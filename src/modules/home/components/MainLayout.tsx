@@ -3,10 +3,11 @@ import { useGetMoviesTans } from "../hooks/useGetMoviesTans";
 import { LoaderCircle, Film, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { MovieCard } from "./MovieCard";
+import { Paginationa } from "./Pagination";
+import type { IMovie } from "@/modules/types";
 
 export const MainLayout = () => {
-  const { movies, loading, isError } = useGetMoviesTans();
-
+  const { movies, loading, isError, totalPages } = useGetMoviesTans(1);
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-100">
@@ -55,9 +56,9 @@ export const MainLayout = () => {
       </div>
     );
   }
-
+  console.log(totalPages);
   return (
-    <div className="space-y-6 ">
+    <div className="space-y-6 min-h-screen flex flex-col">
       <div>
         <NavigationMnu />
       </div>
@@ -66,8 +67,8 @@ export const MainLayout = () => {
           <h2 className="text-2xl font-bold text-white">All Movies</h2>
           <span className="text-slate-400">{movies.length} movies</span>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {movies.map((movie) => (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
+          {movies.map((movie: IMovie) => (
             <Link
               key={movie._id}
               to={`/movie/${movie._id}`}
@@ -78,6 +79,9 @@ export const MainLayout = () => {
           ))}
         </div>
       </div>
+      <footer className="mt-4">
+        <Paginationa totalPages={totalPages!} />
+      </footer>
     </div>
   );
 };

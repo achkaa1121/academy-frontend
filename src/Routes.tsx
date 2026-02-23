@@ -3,6 +3,7 @@ import { MainLayout } from "./modules/home/components/MainLayout";
 import { TopMovies } from "./modules/topMovies/components/TopMovies";
 import { PopularMovies } from "./modules/popularMovies/components/PopularMovies";
 import { MovieGenre } from "./modules/genre/components/MoviesGenre";
+import { Paginationa } from "./modules/home/components/Pagination";
 export const AppRoutes = () => {
   return (
     <Routes>
