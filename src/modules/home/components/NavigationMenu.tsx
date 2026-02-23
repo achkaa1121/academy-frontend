@@ -10,10 +10,7 @@ import {
 import {
   InputGroup,
   InputGroupAddon,
-  InputGroupButton,
   InputGroupInput,
-  InputGroupText,
-  InputGroupTextarea,
 } from "@/components/ui/input-group";
 import { Link } from "react-router";
 import { SearchIcon } from "lucide-react";
